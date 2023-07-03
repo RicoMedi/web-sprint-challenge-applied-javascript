@@ -1,4 +1,30 @@
-const Header = (title, date, temp) => {
+// TASK 1
+  // ---------------------
+  // Implement this function taking `title`, `date` and `temp` as its 3 args and returning the markup below.
+ const Header = (title, date, temp) => {
+  //    <span class="temp">{ temp }</span>
+  //  </div>
+  //
+  const navHeader = document.createElement('div');
+  const spanD = document.createElement('span');
+  const titleElem = document.createElement('h1');
+  const tempSpan = document.createElement('span');
+
+  navHeader.classList.add('header');
+  spanD.classList.add('date');
+  tempSpan.classList.add('temp');
+
+ navHeader.appendChild(spanD)
+ navHeader.appendChild(titleElem)
+ navHeader.appendChild(tempSpan)
+
+  spanD.textContent = `${date}`;
+  titleElem.textContent = `${title}`;
+  tempSpan.textContent = `${temp}`;
+
+  return navHeader;
+}
+
   // TASK 1
   // ---------------------
   // Implement this function taking `title`, `date` and `temp` as its 3 args and returning the markup below.
@@ -11,7 +37,7 @@ const Header = (title, date, temp) => {
   //    <span class="temp">{ temp }</span>
   //  </div>
   //
-}
+
 
 const headerAppender = (selector) => {
   // TASK 2
@@ -20,7 +46,10 @@ const headerAppender = (selector) => {
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
+ const addInfo = document.querySelector(selector);
 
+  addInfo.appendChild(Header('Ricardo Medina', '7/2/2023', '72'));
+  return addInfo;
   // HINT: querySelector can take in a string (ie querySelector("#wrapper")) 
   // but it can also take in a variable (ie querySelector(selector))
   // We are taking care of passing in the correct selector on line 16,
