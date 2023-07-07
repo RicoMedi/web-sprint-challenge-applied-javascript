@@ -1,4 +1,33 @@
+import axios from 'axios'
+
+
 const Card = (article) => {
+  const cards = document.createElement('div')
+  const imgContainer = document.createElement('div')
+  const img = document.createElement('img')
+  const spanBy = document.createElement('span')
+  const author = document.createElement('div')
+  const headline = document.createElement('div')
+
+  img.src = article.authorPhoto
+  img.alt = 'Photo of author'
+
+  author.classList.add('author')
+  imgContainer.classList.add('img-container')
+  cards.classList.add('card')
+  headline.classList.add('headline')
+
+  headline.textContent = article.headline
+  by.textContent = `By ${article.authorName}`
+
+  cards.appendChild(headline)
+  cards.appendChild(author)
+  author.appendChild(imgContainer)
+  author.appendChild(spanBy)
+  imgContainer.appendChild(img)
+
+  return cards;
+
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -19,8 +48,7 @@ const Card = (article) => {
   //
 }
 
-const cardAppender = (selector) => {
-  // TASK 6
+ // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
   // It should obtain articles from this endpoint: `http://localhost:5001/api/articles` (test it with console.log!!).
@@ -28,6 +56,20 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-}
 
-export { Card, cardAppender }
+
+  const cardAppender = (selector) => {
+    axios.get('http://localhost:5001/api/articles')
+      .then(res => {
+        const articleCategories = ['javascript', 'bootstrap', 'technology', 'node', 'jquery'];
+        for (let category of articleCategories) {
+          const articles = res.data.articles[category];
+          for (let article of articles) {
+            const card = Card(article);
+            document.querySelector(selector).appendChild(card);
+          }
+        }
+      });
+  };
+  
+  export { Card, cardAppender };
