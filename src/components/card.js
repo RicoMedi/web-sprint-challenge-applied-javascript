@@ -18,7 +18,7 @@ const Card = (article) => {
   headline.classList.add('headline')
 
   headline.textContent = article.headline
-  by.textContent = `By ${article.authorName}`
+  spanBy.textContent = `By ${article.authorName}`
 
   cards.appendChild(headline)
   cards.appendChild(author)
